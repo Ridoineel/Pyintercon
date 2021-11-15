@@ -1,12 +1,19 @@
 # A simple python Server and Client for interconnect your application
 
+All package that use in this is built-in packages (refer in requirements.txt)
+
+The server is activate on server host, and the client in all application clients (interconnecedt).
+
+Client send request to Server and the Server answered.
+The traitement function of server can be edit by developper.
+
 ## Samples:
 
 ### Server:
 ```python
     >>> from server import Server
 
-    >>> #initialize the server
+    >>> # initialize the server
     >>> sv = Server(nb_client = 1)
 
     >>> # run the server on $host address and $port
