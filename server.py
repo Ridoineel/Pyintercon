@@ -22,13 +22,13 @@ class Server:
         self.nb_client = nb_client
 
     def treatment(self, request_datas: dict) -> dict:
-        """This function take request datas (dict) from client and return the 
+        """This function take request datas (dict) from client and return the
             response datas (dict)
 
             !!!!!!!! !!!!!!! DEFINED BY USER !!!!!! !!!!!!!
-        """ 
+        """
 
-        default_res = {"Status": "No default response"}
+        default_res = {"status": 1, "message": "default"}
 
         return default_res
 
@@ -38,16 +38,16 @@ class Server:
         """
 
         containt = json_decode(request_datas)
-        
+
         response_containt = self.treatment(containt)
 
         return json_encode(response_containt)
-    
+
     def activate(self, ip: str, port: int):
         """ bind/activate server on @ip and @port,
             accept client, receve her request datas and
             manage the response
-        
+
         """
 
         con = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -67,17 +67,17 @@ class Server:
         for _ in range( self.nb_client ):
             # accept client
             client, param = con.accept()
-            # set a client timeout for futur opération 
+            # set a client timeout for futur opération
             # on this: -> server waiting for receve request
             client.settimeout(.5)
-            
-            
+
+
             clients_list.append( (client, param) )
 
             print(f"\t{param} is connected ...")
 
         while True:
-            
+
             for client, param in clients_list:
                 try:
                     # receve request datas
@@ -93,8 +93,8 @@ class Server:
                     rep = self.response(req)
                     client.send(str(rep).encode())
 
-        con.close() 
-        
+        con.close()
+
     @staticmethod
     def exit(signal, frame):
         print()
