@@ -1,1 +1,1 @@
-# A simple server and client for interconnect your application
+# A simple python Server and Client for interconnect your application
