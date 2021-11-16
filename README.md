@@ -1,4 +1,4 @@
-# Pyinterconnect is a simple python Server and Client for interconnect your application hosts
+# Pyinterconnect is a simple python server and client to interconnect the hosts of your application.
 
 > All package that use in this is built-in packages (refer in requirements.txt)
 
