@@ -102,8 +102,9 @@ class Server:
 
         sys.exit(0)
 
-if __name__ == '__main__':
-    signal.signal(signal.SIGINT, Server.exit)
+# set exit signal function
+signal.signal(signal.SIGINT, Server.exit)
 
+if __name__ == '__main__':
     sv = Server(2)
     sv.activate("", 8000)
