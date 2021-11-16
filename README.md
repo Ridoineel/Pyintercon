@@ -50,12 +50,12 @@ The traitement function of server can be edit by developper.
     """
 ```
 
-> ##### The server manage the response loader by the treatment function.
-This function take the request data (dict object) and return by default _{"status": 1, "message": "default"}_. </br>
-He can edit it by set server.treatment = your_treatment_function </br>
-```python
-    >>>> sv = Server() # One client by default
-    >>>> sv.treatment = your_treatment_function
+> #### The server manage the response loader by the treatment function.
+> This function take the request data (dict object) and return by default _{"status": 1, "message": "default"}_. </br>
+> He can edit it by set server.treatment = your_treatment_function </br>
+> ```python
+    >>> sv = Server() # One client by default
+    >>> sv.treatment = your_treatment_function
 ```
 
 ## Last's example:
