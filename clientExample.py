@@ -1,6 +1,5 @@
 # coding: utf-8;
-import socket
-from client import Client
+from pyconnect import Client
 
 host_ip = "localhost"
 port = 8080

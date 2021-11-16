@@ -12,7 +12,7 @@ The traitement function of server can be edit by developper.
 
 ### Server:
 ```python
-    >>> from server import Server
+    >>> from pyconnect import Server
 
     >>> # initialize the server
     >>> sv = Server(nb_client = 1)
@@ -25,7 +25,7 @@ The traitement function of server can be edit by developper.
 
 ### Client
 ```python
-    >>> from client import Client
+    >>> from pyconnect import Client
 
     >>> # initialize the client
     >>> cl = Client()
@@ -65,7 +65,7 @@ The traitement function of server can be edit by developper.
 ### Server
 
 ```python
-from server import Server
+from pyconnect import Server
 
 def response_loader(request):
     """ Just reverse the message content.
@@ -92,7 +92,7 @@ if __name__ == "__main__":
 ### Client
 
 ```python
-    >>> from client import Client
+    >>> from pyconnect import Client
     >>> cl = Client()
     >>> cl.connect("localhost", 8080)
     >>> res = cl.send({"message": "Hello World !"})
