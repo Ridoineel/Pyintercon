@@ -49,13 +49,15 @@ The traitement function of server can be edit by developper.
         ('127.0.0.1', 44042) is disconnected ...
     """
 ```
+</br>
 
-> ##### The server manage the response loader by the treatment function.
-This function take the request data (dict object) and return by default _{"status": 1, "message": "default"}_. </br>
-He can edit it by set server.treatment = your_treatment_function </br>
+> #### The server manage the response loader by the treatment function.
+> This function take the request data (dict object) and return by default _{"status": 1, "message": "default"}_. </br>
+> He can edit it by set server.treatment = your_treatment_function
+
 ```python
-    >>>> sv = Server() # One client by default
-    >>>> sv.treatment = your_treatment_function
+    >>> sv = Server() # One client by default
+    >>> sv.treatment = your_treatment_function
 ```
 
 ## Last's example:
@@ -99,6 +101,7 @@ if __name__ == "__main__":
     {"message": "! dlroW olleH"}
 ```
 
+</br>
 
 > ## Futures:
 * Use threading for get client simultaneously with manage request response.
