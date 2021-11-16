@@ -86,7 +86,7 @@ class Server:
 
                 except AssertionError:
                     clients_list.remove((client, param))
-                    print(f"\t!!!! {param} is disconnected !!!!")
+                    print(f"\t{param} is disconnected !")
                 except:
                     continue
                 else:
