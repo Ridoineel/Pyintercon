@@ -14,7 +14,7 @@ json_decode = JSONDecoder().decode
 
 class Server:
     """ This Server Object accept client and send response by her request,
-    
+
         *param: @nb_client: the number of client which will be connected to server
 
     """

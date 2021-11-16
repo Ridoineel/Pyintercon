@@ -1,4 +1,4 @@
-# Pyconnect is a simple python Server and Client for interconnect your application
+# Pyinterconnect is a simple python Server and Client for interconnect your application hosts
 
 > All package that use in this is built-in packages (refer in requirements.txt)
 
@@ -12,7 +12,7 @@ The traitement function of server can be edit by developper.
 
 ### Server:
 ```python
-    >>> from pyconnect import Server
+    >>> from pyinterconnect import Server
 
     >>> # initialize the server
     >>> sv = Server(nb_client = 1)
@@ -25,7 +25,7 @@ The traitement function of server can be edit by developper.
 
 ### Client
 ```python
-    >>> from pyconnect import Client
+    >>> from pyinterconnect import Client
 
     >>> # initialize the client
     >>> cl = Client()
@@ -65,7 +65,7 @@ The traitement function of server can be edit by developper.
 ### Server
 
 ```python
-from pyconnect import Server
+from pyinterconnect import Server
 
 def response_loader(request):
     """ Just reverse the message content.
@@ -92,7 +92,7 @@ if __name__ == "__main__":
 ### Client
 
 ```python
-    >>> from pyconnect import Client
+    >>> from pyinterconnect import Client
     >>> cl = Client()
     >>> cl.connect("localhost", 8080)
     >>> res = cl.send({"message": "Hello World !"})
