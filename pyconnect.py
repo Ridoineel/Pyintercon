@@ -1,4 +1,5 @@
 # coding: utf-8;
+#! /usr/bin/env python3
 
 import socket
 import signal
@@ -13,8 +14,8 @@ json_decode = JSONDecoder().decode
 
 class Server:
     """ This Server Object accept client and send response by her request,
-
-    *param: @nb_client: the number of client which will be connected to server
+    
+        *param: @nb_client: the number of client which will be connected to server
 
     """
 
@@ -149,5 +150,5 @@ class Client:
 signal.signal(signal.SIGINT, Server.exit)
 
 if __name__ == '__main__':
-    sv = Server(2)
+    sv = Server(1)
     sv.activate("", 8000)

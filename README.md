@@ -1,4 +1,4 @@
-# A simple python Server and Client for interconnect your application
+# Pyconnect is a simple python Server and Client for interconnect your application
 
 > All package that use in this is built-in packages (refer in requirements.txt)
 
