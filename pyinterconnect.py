@@ -21,6 +21,8 @@ class Server:
 
     def __init__(self, nb_client: int = 1):
         self.nb_client = nb_client
+        # set exit signal function
+        signal.signal(signal.SIGINT, Server.exit)
 
     def treatment(self, request_datas: dict) -> dict:
         """This function take request datas (dict) from client and return the
@@ -146,9 +148,9 @@ class Client:
             print("WARNING: Client not connected !!!")
 
 
-# set exit signal function
-signal.signal(signal.SIGINT, Server.exit)
-
 if __name__ == '__main__':
-    sv = Server(1)
-    sv.activate("", 8000)
+    print("""
+        Class:
+            Server: use to create server, accept client and answered client
+            Client: use to connect server and send it request
+    """)
