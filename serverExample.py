@@ -1,4 +1,4 @@
-from pyinterconnect import Server
+from pyintercon import Server
 
 def response_loader(request):
     """ Just reverse the message content.

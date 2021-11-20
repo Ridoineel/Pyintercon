@@ -1,5 +1,5 @@
 # coding: utf-8;
-from pyinterconnect import Client
+from pyintercon import Client
 
 host_ip = "localhost"
 port = 8080
