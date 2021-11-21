@@ -21,6 +21,8 @@ class Server:
 
     def __init__(self, nb_client: int = 1):
         self.nb_client = nb_client
+        self.con = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
         # set exit signal function
         signal.signal(signal.SIGINT, Server.exit)
 
@@ -53,10 +55,9 @@ class Server:
 
         """
 
-        con = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        con.bind((ip, port))
+        self.con.bind((ip, port))
 
-        con.listen(self.nb_client)
+        self.con.listen(self.nb_client)
 
         # attribute localhost name to ip if
         # ip is empty
@@ -69,7 +70,7 @@ class Server:
 
         for _ in range( self.nb_client ):
             # accept client
-            client, param = con.accept()
+            client, param = self.con.accept()
             # set a client timeout for futur opération
             # on this: -> server waiting for receve request
             client.settimeout(.5)
@@ -96,7 +97,7 @@ class Server:
                     rep = self.response(req)
                     client.send(str(rep).encode())
 
-        con.close()
+        self.con.close()
 
     @staticmethod
     def exit(signal, frame):
@@ -110,10 +111,10 @@ class Client:
 
     def __init__(self):
         self.status = {"connected": False}
+        self.con = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def connect(self, ip: str, port: int):
         if not self.status["connected"]:
-            self.con = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.con.connect((ip, port))
 
             self.status["connected"] = True
