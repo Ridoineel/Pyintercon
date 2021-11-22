@@ -85,7 +85,7 @@ class Server:
             for client, param in clients_list:
                 try:
                     # receve request datas
-                    req = client.recv(100).decode()
+                    req = client.recv(10**9).decode()
                     assert req
 
                 except AssertionError:
@@ -141,7 +141,7 @@ class Client:
 
             self.con.send(containt.encode())
 
-            rep = self.con.recv(1000)
+            rep = self.con.recv(10**9)
 
             return json_decode( rep.decode() )
 
