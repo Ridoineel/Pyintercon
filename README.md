@@ -7,6 +7,12 @@ The server is activate on server host, and the client in all application clients
 Client send request to Server and the Server answered.
 The traitement function of server can be edit by developper.
 
+## Install pyintercon
+
+```bash
+    pip install pyintercon
+```
+
 
 ## Example:
 
