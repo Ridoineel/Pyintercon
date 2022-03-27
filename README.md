@@ -48,7 +48,7 @@ The traitement function of server can be edit by developper.
 
     >>> print(response)
     {'status': 1, 'message': 'default'}
-    >>> # use disconnected method to disconnect server
+    >>> # use disconnect method to disconnect server
     >>> cl.disconnect()
 
     >>> """ server output:
