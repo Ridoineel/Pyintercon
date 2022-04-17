@@ -13,7 +13,19 @@ json_encode = JSONEncoder().encode
 json_decode = JSONDecoder().decode
 
 class Server:
-    """ This Server Object accept client and send response by her request,
+    """ This server accepts clients and responds 
+        to their request by a request processing function
+        that you define by setRequestHandler method
+
+        >>> sv = Server()
+        >>> # set request handler
+        >>> sv.setRequestHandler(your_handler_function)
+        >>> 
+        >>> # Now, activate server
+        >>> sv.activate(("", 8080))
+        Server is activated on localhost:8080...
+        Tap CTRL + C to quit !!!!!
+
 
     """
 
@@ -23,11 +35,11 @@ class Server:
         # set exit signal function
         signal.signal(signal.SIGINT, Server.exit)
 
-    def treatment(self, request_datas: dict) -> dict:
-        """This function take request datas (dict) from client and return the
-            response datas (dict)
+    def _requestHandler(self, request_datas: dict) -> dict:
+        """ This function take request data (dict) from client and return the
+            response data (dict)
 
-            !!!!!!!! !!!!!!! DEFINED BY USER !!!!!! !!!!!!!
+            !!!!!!!! DEFINED BY USER WITH setRequesthandler !!!!!!!
         """
 
         default_res = {"status": 1, "message": "default"}
@@ -35,34 +47,34 @@ class Server:
         return default_res
 
     def handleResponse(self, request_datas: str) -> str:
-        """ By treatment function, this function take string request_datas
+        """ By requestHandler function, this function take string request data
             and return response (str)
         """
 
         containt = json_decode(request_datas)
 
-        response_containt = self.treatment(containt)
+        response_containt = self._requestHandler(containt)
 
         return json_encode(response_containt)
 
     def activate(self, ip: str, port: int):
         """ bind/activate server on @ip and @port,
-            accept client, receve her request datas and
-            manage the response
+            accept clients, receive their request data and
+            manage the return of response
 
         """
 
         self.con.bind((ip, port))
         self.con.listen()
 
-        # attribute localhost name to ip if
-        # ip is empty
+        clients_list = list()
+
+        # attribute "localhost" to ip
+        # if ip is empty
         if not ip: ip = 'localhost'
 
         print(f'Server is activated on {ip}:{port}...')
         print('Tap CTRL + C to quit !!!!!\n')
-
-        clients_list = list()
 
         process1 = ConnexionThread(self.con, clients_list)
         process2 = ResponseThread(clients_list, self.handleResponse)
@@ -75,12 +87,20 @@ class Server:
 
         self.con.close()
 
+    def setRequestHandler(self, function):
+        if function:
+            self._requestHandler = function
+        else:
+            raise ValueError("invalid function")
+
     @staticmethod
     def exit(signal, frame):
         print()
         print('Server is disconnected !!!')
 
         sys.exit(0)
+
+
 
 
 class Client:
@@ -128,6 +148,6 @@ class Client:
 if __name__ == '__main__':
     print("""
         Class:
-            Server: use to create server, accept client and answered client
-            Client: use to connect to server and set request
+            Server: use to create server, accept clients and respond to their request
+            Client: use to connect to a server and make requests 
     """)
