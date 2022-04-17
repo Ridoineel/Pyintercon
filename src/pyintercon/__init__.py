@@ -4,10 +4,10 @@
 import socket
 import signal
 import sys
-import threading
-
 from json.encoder import JSONEncoder
 from json.decoder import JSONDecoder
+from .threads import ConnexionThread
+from .threads import ResponseThread
 
 json_encode = JSONEncoder().encode
 json_decode = JSONDecoder().decode
@@ -15,12 +15,9 @@ json_decode = JSONDecoder().decode
 class Server:
     """ This Server Object accept client and send response by her request,
 
-        *param: @nb_client: the number of client which will be connected to server
-
     """
 
-    def __init__(self, nb_client: int = 1):
-        self.nb_client = nb_client
+    def __init__(self):
         self.con = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         # set exit signal function
@@ -37,9 +34,9 @@ class Server:
 
         return default_res
 
-    def response(self, request_datas: str) -> str:
-        """By treatment function, this function take request_datas on str type and return a correct
-            response format (str)
+    def handleResponse(self, request_datas: str) -> str:
+        """ By treatment function, this function take string request_datas
+            and return response (str)
         """
 
         containt = json_decode(request_datas)
@@ -56,8 +53,7 @@ class Server:
         """
 
         self.con.bind((ip, port))
-
-        self.con.listen(self.nb_client)
+        self.con.listen()
 
         # attribute localhost name to ip if
         # ip is empty
@@ -68,34 +64,14 @@ class Server:
 
         clients_list = list()
 
-        for _ in range( self.nb_client ):
-            # accept client
-            client, param = self.con.accept()
-            # set a client timeout for futur opération
-            # on this: -> server waiting for receve request
-            client.settimeout(.5)
+        process1 = ConnexionThread(self.con, clients_list)
+        process2 = ResponseThread(clients_list, self.handleResponse)
+        
+        process1.start()
+        process2.start()
 
-
-            clients_list.append( (client, param) )
-
-            print(f"\t{param} is connected ...")
-
-        while True:
-
-            for client, param in clients_list:
-                try:
-                    # receve request datas
-                    req = client.recv(10**9).decode()
-                    assert req
-
-                except AssertionError:
-                    clients_list.remove((client, param))
-                    print(f"\t{param} is disconnected !")
-                except:
-                    continue
-                else:
-                    rep = self.response(req)
-                    client.send(str(rep).encode())
+        process1.join()
+        process2.join()
 
         self.con.close()
 
@@ -153,5 +129,5 @@ if __name__ == '__main__':
     print("""
         Class:
             Server: use to create server, accept client and answered client
-            Client: use to connect server and send it request
+            Client: use to connect to server and set request
     """)
