@@ -1,11 +1,10 @@
-# Pyintercon is a simple python server and client to interconnect the hosts of your application.
+# Pyintercon is a python module to connect your server and your clients and exchange information with  them
 
-> All package that use in this is built-in packages (refer in requirements.txt)
-
-The server is activate on server host, and the client in all application clients (interconnected).
+The class Server of pyintercon is activate on server host, <br />
+and the class  Client in all application clients.
 
 Client send request to Server and the Server answered.
-The traitement function of server can be edit by developper.
+The request handler function of server would be defined by developper.
 
 ## Install pyintercon
 
@@ -21,10 +20,10 @@ The traitement function of server can be edit by developper.
     >>> from pyintercon import Server
 
     >>> # initialize the server
-    >>> sv = Server(nb_client = 1)
+    >>> sv = Server()
 
     >>> # run the server on $host address and $port
-    >>> sv.actiavte("localhost", 8080)
+    >>> sv.actiavte("", 8080)
     """Server is activated on localhost:8080...
     Tap CTRL + C to quit !!!!!"""
 ```
@@ -57,16 +56,17 @@ The traitement function of server can be edit by developper.
 ```
 </br>
 
-> #### The server manage the response loader by the treatment function.
+> #### The server manage the response by the request handler function.
 > This function take the request data (dict object) and return by default _{"status": 1, "message": "default"}_. </br>
-> He can edit it by set server.treatment = your_treatment_function
+> Can be edited by server.setRequestHandler(your_handler_function)
 
 > ```python
->    >>> sv = Server() # One client by default
->    >>> sv.treatment = your_treatment_function
+>    >>> sv = Server()
+>    >>> server.setRequestHandler(your_handler_function)
 > ```
+> See example below
 
-## Last's example:
+## Example:
 
 ### Server
 
@@ -86,8 +86,8 @@ def response_loader(request):
 def main():
     sv = Server()
 
-    # set the treatment function
-    sv.treatment = response_loader
+    # set the request handler function
+    sv.setRequestHandler(response_loader)
 
     sv.activate("localhost", 8080)
 
@@ -110,5 +110,4 @@ if __name__ == "__main__":
 </br>
 
 > ## Futures:
-* Use threading for get client simultaneously with manage request response.
 * Add more events, possibility to emit events.
