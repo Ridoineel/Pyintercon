@@ -21,8 +21,8 @@ See below for how to set a request handler function and how it works
     >>> # initialize the server
     >>> sv = Server()
 
-    >>> # run the server using host address and port
-        # the default host address is "localhost"
+    >>> # run the server using hostname and port
+        # the default hostname is "localhost"
     >>> sv.activate("", 8080)
     """Server is activated on localhost:8080...
     Tap CTRL + C to quit !!!!!"""
