@@ -1,10 +1,13 @@
 # Pyintercon is a python module to connect your server and your clients and exchange information with  them
 
-The class Server of pyintercon is activate on server host, <br />
-and the class  Client in all application clients.
+```
+The class Server of pyintercon is used on server host, <br />
+and the class  Client on all your application's clients.
 
 Client send request to Server and the Server answered.
-The request handler function of server would be defined.
+The server's request handler function would be defined.
+```
+
 
 ## Install pyintercon
 
@@ -22,7 +25,7 @@ The request handler function of server would be defined.
     >>> # initialize the server
     >>> sv = Server()
 
-    >>> # run the server on $host address and $port
+    >>> # run the server using host address and port
     >>> sv.actiavte("", 8080)
     """Server is activated on localhost:8080...
     Tap CTRL + C to quit !!!!!"""
