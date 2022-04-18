@@ -1,8 +1,8 @@
 # Pyintercon is a python module to connect your server and your clients and exchange information with  them
 
 ```
-The class Server of pyintercon is used on server host, <br />
-and the class  Client on all your application's clients.
+The Server class of pyintercon is used on server host, <br />
+and the Client class on all your application's clients.
 
 Client send request to Server and the Server answered.
 The server's request handler function would be defined.
