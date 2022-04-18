@@ -4,7 +4,7 @@ The class Server of pyintercon is activate on server host, <br />
 and the class  Client in all application clients.
 
 Client send request to Server and the Server answered.
-The request handler function of server would be defined by developper.
+The request handler function of server would be defined.
 
 ## Install pyintercon
 
